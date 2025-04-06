@@ -22,7 +22,7 @@ func LoadEnv() *Config {
 	}
 
 	return &Config{
-		DBName:     viper.GetString("DB_NAME"),
+		DBName:     viper.GetString("DBName"),
 		DBUser:     viper.GetString("DB_USER"),
 		DBPassword: viper.GetString("DB_PASSWORD"),
 		DBPort:     viper.GetString("DB_PORT"),
