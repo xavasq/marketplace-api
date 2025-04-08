@@ -16,7 +16,8 @@ type DBPool struct {
 func ConnectDB(ctx context.Context, logger *zap.Logger) (*DBPool, error) {
 	cfg, err := config.LoadEnv()
 	if err != nil {
-		logger.Warn("проблема с загрузкой конфигурации", zap.Error(err))
+		logger.Error("проблема с загрузкой конфигурации", zap.Error(err))
+		return nil, fmt.Errorf("ошибка конфигурации: %w", err)
 	}
 
 	dsn := fmt.Sprintf("postgres://%s:%s@%s:%s/%s", cfg.DBUser, cfg.DBPassword, cfg.DBHost, cfg.DBPort, cfg.DBName)
