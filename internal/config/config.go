@@ -13,19 +13,29 @@ type Config struct {
 	DBPort     string
 }
 
-func LoadEnv() *Config {
+func LoadEnv() (*Config, error) {
+	viper.SetDefault("DB_NAME", "postgres")
+	viper.SetDefault("DB_USER", "postgres")
+	viper.SetDefault("DB_HOST", "localhost")
+	viper.SetDefault("DB_PORT", "5432")
+
 	viper.SetConfigFile(".env")
 	viper.AutomaticEnv()
 
 	if err := viper.ReadInConfig(); err != nil {
-		fmt.Printf("ошибка при загрузке файла .env: %v", err)
+		return nil, fmt.Errorf("ошибка при загрузке файла .env: %w", err)
 	}
 
-	return &Config{
-		DBName:     viper.GetString("DBName"),
-		DBUser:     viper.GetString("DBUser"),
+	config := &Config{
+		DBName:     viper.GetString("DB_NAME"),
+		DBUser:     viper.GetString("DB_USER"),
 		DBPassword: viper.GetString("DB_PASSWORD"),
 		DBPort:     viper.GetString("DB_PORT"),
 		DBHost:     viper.GetString("DB_HOST"),
 	}
+
+	if config.DBPassword == "" {
+		return nil, fmt.Errorf("DB_PASSWORD не указан в конфигурации")
+	}
+	return config, nil
 }
