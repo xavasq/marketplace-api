@@ -5,4 +5,5 @@ type User struct {
 	Email    string
 	Password string
 	Role     string
+	Balance  int64
 }

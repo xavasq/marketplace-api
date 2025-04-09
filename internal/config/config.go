@@ -11,6 +11,7 @@ type Config struct {
 	DBPassword string
 	DBHost     string
 	DBPort     string
+	JWTSecret  string
 }
 
 func LoadEnv() (*Config, error) {
@@ -36,6 +37,10 @@ func LoadEnv() (*Config, error) {
 
 	if config.DBPassword == "" {
 		return nil, fmt.Errorf("DB_PASSWORD не указан в конфигурации")
+	}
+
+	if config.JWTSecret == "" {
+		return nil, fmt.Errorf("JWT_SECRET не указан в конфигурации")
 	}
 	return config, nil
 }
