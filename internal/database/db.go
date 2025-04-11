@@ -16,7 +16,7 @@ type DBPool struct {
 func ConnectDB(ctx context.Context, logger *zap.Logger) (*DBPool, error) {
 	cfg, err := config.LoadEnv()
 	if err != nil {
-		logger.Error("проблема с загрузкой конфигурации", zap.Error(err))
+		logger.Error("проблема c загрузкой конфигурации", zap.Error(err))
 		return nil, fmt.Errorf("ошибка конфигурации: %w", err)
 	}
 
@@ -31,7 +31,8 @@ func ConnectDB(ctx context.Context, logger *zap.Logger) (*DBPool, error) {
 	if err := pool.Ping(ctx); err != nil {
 		pool.Close()
 		logger.Error("ошибка при проверке соединения с базой данных", zap.Error(err))
-		return nil, fmt.Errorf("не удалось проверить соединение с БД: %w", err)
+		return nil,
+			fmt.Errorf("не удалось проверить соединение с БД: %w", err)
 	}
 
 	logger.Info("база данных подключена успешно")
