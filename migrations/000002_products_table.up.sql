@@ -8,11 +8,11 @@ CREATE TABLE products(
 );
 
 
-CREATE OR REPLACE set_products_update_at();
-RETURNS TRIGGER AS $$;
+CREATE OR REPLACE FUNCTION set_products_update_at()
+RETURNS TRIGGER AS $$
 BEGIN
     NEW.updated_at := CURRENT_TIMESTAMP;
-    RETURN NEW; 
+    RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
