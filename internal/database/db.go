@@ -17,7 +17,7 @@ func ConnectDB(ctx context.Context, logger *zap.Logger) (*DBPool, error) {
 	cfg, err := config.LoadEnv()
 	if err != nil {
 		logger.Error("проблема c загрузкой конфигурации", zap.Error(err))
-		return nil, fmt.Errorf("ошибка конфигурации: %w", err)
+		return nil, fmt.Errorf("ошибка в конфигурации: %w", err)
 	}
 
 	dsn := fmt.Sprintf("postgres://%s:%s@%s:%s/%s", cfg.DBUser, cfg.DBPassword, cfg.DBHost, cfg.DBPort, cfg.DBName)
