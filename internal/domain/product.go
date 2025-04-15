@@ -5,4 +5,5 @@ type Product struct {
 	Name     string
 	Price    int64
 	Quantity int
+	QQQ      string
 }
