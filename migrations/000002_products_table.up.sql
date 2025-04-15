@@ -1,0 +1,22 @@
+CREATE TABLE products(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    price BIGINT  NOT NULL CHECK (price >= 0),
+    quantity INT NOT NULL CHECK (quantity >= 0),
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE OR REPLACE FUNCTION set_products_update_at()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at := CURRENT_TIMESTAMP;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_products
+BEFORE UPDATE ON products
+FOR EACH ROW
+EXECUTE FUNCTION set_products_update_at();

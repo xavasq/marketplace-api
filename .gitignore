@@ -27,7 +27,11 @@ Thumbs.db
 # Env files
 .env
 .env.*
+!.env.example
 
 # Go build cache and temp
 *.tmp
+
+
+
 
