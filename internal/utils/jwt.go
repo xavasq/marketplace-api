@@ -34,7 +34,6 @@ func (m *JWTMethod) GenerateJWT(userID int64, email, role string) (string, error
 			NotBefore: jwt.NewNumericDate(time.Now()),
 		},
 	}
-
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, &claims)
 	return token.SignedString(m.secret)
 }
