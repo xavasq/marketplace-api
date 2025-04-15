@@ -34,7 +34,6 @@ func ConnectDB(ctx context.Context, logger *zap.Logger) (*DBPool, error) {
 		return nil,
 			fmt.Errorf("не удалось проверить соединение с БД: %w", err)
 	}
-
 	logger.Info("база данных подключена успешно")
 	return &DBPool{Pool: pool, logger: logger}, nil
 }
