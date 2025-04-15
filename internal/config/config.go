@@ -19,7 +19,6 @@ func LoadEnv() (*Config, error) {
 	viper.SetDefault("DB_USER", "postgres")
 	viper.SetDefault("DB_HOST", "localhost")
 	viper.SetDefault("DB_PORT", "5432")
-
 	viper.SetConfigFile(".env")
 	viper.AutomaticEnv()
 
