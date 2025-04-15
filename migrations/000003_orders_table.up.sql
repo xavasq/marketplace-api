@@ -16,7 +16,6 @@ CREATE INDEX idx_orders_user_id ON orders(user_id);
 CREATE INDEX idx_orders_product_id ON orders(product_id);
 CREATE INDEX idx_orders_user_id_created_at ON orders(user_id, created_at);
 
-
 CREATE OR REPLACE FUNCTION set_orders_update_at()
 RETURNS TRIGGER AS $$
 BEGIN
